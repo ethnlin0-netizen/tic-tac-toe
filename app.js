@@ -2,6 +2,9 @@ const playBtn = document.getElementById("playBtn");
 const backBtn = document.getElementById("backBtn");
 const play1 = document.getElementById("1PlayerBtn");
 const play2 = document.getElementById("2PlayerBtn");
+const start = document.querySelector(".start");
+const game = document.querySelector(".game");
+
 
 playBtn.addEventListener("click", () => {
     playBtn.classList.add("hidden");
@@ -15,4 +18,25 @@ backBtn.addEventListener("click", () => {
     backBtn.classList.add("hidden");
     play1.classList.add("hidden");
     play2.classList.add("hidden");
-})
+});
+
+play2.addEventListener("click", () => {
+    start.classList.add("hidden");
+    game.classList.remove("hidden");
+});
+
+const board = document.querySelectorAll(".square");
+let turn = "x";
+board.forEach(square => {
+    square.addEventListener("click", () => {
+        const coordinate = square.dataset.value;
+    })
+});
+
+//idea: when each square is clicked, set the text of that square to "X" or "O"
+//switch the turn, then update a separate 2d array accordingly
+//this array will be used to track if a move is valid or if someone has won
+//the data-value of each square will determine which array element to update
+
+
+

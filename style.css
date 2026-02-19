@@ -21,6 +21,28 @@ body {
     padding: 40px 20px;
 }
 
+.game {
+    display: grid;
+    grid-template-columns: repeat(3, 0px);
+    gap: 0px;
+    height: 300px;
+    width: 300px;
+}
+
+.square {
+    padding: 100px 100px;
+    background: white;
+    border: black;
+}
+
+.x {
+    color: orange;
+}
+
+.o {
+    color: yellow;
+}
+
 .hidden {
     display: none;
 }
@@ -34,4 +56,5 @@ body {
     font-weight: 600;
     cursor: pointer;
     margin-top: 20px;   
+    transition: transform 0.1s ease, background 0.2s ease;
 }
