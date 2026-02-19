@@ -1,0 +1,18 @@
+.start {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+    width: 70px;
+    background: rgb(170, 207, 249);
+    color: black;
+}
+
+.normal {
+    width: 50px;
+    height: 20px;
+    background: midnightblue;
+    color: white;
+    border-radius: 20px;
+    font-size: 20px;
+}
