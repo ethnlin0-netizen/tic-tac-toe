@@ -8,13 +8,21 @@
     color: black;
     border-radius: 24px;
     padding: 20px;
+    margin: 0 auto;
 }
 
 .normal {
+    display: inline-block;
+    text-decoration: none;
+    padding: 22px 37px;
+    border: none;
     width: 50px;
     height: 20px;
     background: midnightblue;
     color: white;
-    border-radius: 20px;
-    font-size: 20px;
+    border-radius: 12px;
+    font-size: 30px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 20px;
 }
