@@ -21,8 +21,12 @@ body {
     padding: 40px 20px;
 }
 
+.hidden {
+    display: none;
+}
+
 .normal {
-    padding: 10px 60px;
+    padding: 10px 60px; /* just use padding to adjust button size */
     background: midnightblue;
     color: white;
     border-radius: 20px;
