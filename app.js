@@ -26,7 +26,7 @@ play2.addEventListener("click", () => {
 });
 
 const board = document.querySelectorAll(".square");
-let turn = "x"
+let turn = "X"
 board.forEach(square => {
     square.addEventListener("click", () => {
         const coordinate = square.dataset.value;
@@ -41,20 +41,54 @@ let grid = [
     ["", "", ""]
 ];
 
+const winPatterns = [
+    [[0,0],[0,1],[0,2]],
+    [[1,0],[1,1],[1,2]], 
+    [[2,0],[2,1],[2,2]],
+    [[0,0],[1,0],[2,0]],
+    [[0,1],[1,1],[2,1]], 
+    [[0,2],[1,2],[2,2]], 
+    [[0,0],[1,1],[2,2]], 
+    [[0,2],[1,1],[2,0]]  
+];
+
+function checkWin(player) {
+    for(let pattern of winPatterns) {
+        if(pattern.every(([r, c]) => grid[r][c] === player)) {
+            //win
+        }
+    }
+    //not win
+}
+
+function draw() {
+    
+}
+
+let turnCount = 0;
+
 function makeMove(square, coord) {
     row = parseInt(coord[0]);
     col = parseInt(coord[1]);
     if(grid[row][col] == "") {
-        if(turn == "x") {
+        if(turn == "X") {
             square.classList.add("x");
-            square.textContent = "X";
-            turn = "o";
-            grid[row][col] = "X"
+            square.textContent = turn;
+            grid[row][col] = turn;
+            turn = "O";
+            
         } else {
             square.classList.add("o");
-            square.textContent = "O";
-            turn = "x"
-            grid[row][col] = "O";
+            square.textContent = turn;
+            grid[row][col] = turn;
+            turn = "X";
+        }
+        turnCount += 1;
+        if (turnCount >= 5) {
+            checkWin(turn === "X" ? "O" : "X");
+        }
+        if(turnCount === 9) {
+            draw();
         }
     }
 }
