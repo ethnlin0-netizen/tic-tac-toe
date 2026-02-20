@@ -55,14 +55,14 @@ const winPatterns = [
 function checkWin(player) {
     for(let pattern of winPatterns) {
         if(pattern.every(([r, c]) => grid[r][c] === player)) {
-            //win
+            return true;
         }
     }
-    //not win
+    return false;
 }
 
 function draw() {
-    
+
 }
 
 let turnCount = 0;
@@ -72,23 +72,29 @@ function makeMove(square, coord) {
     col = parseInt(coord[1]);
     if(grid[row][col] == "") {
         if(turn == "X") {
+            let player = "X"
             square.classList.add("x");
             square.textContent = turn;
             grid[row][col] = turn;
             turn = "O";
             
         } else {
+            let player = "O";
             square.classList.add("o");
             square.textContent = turn;
             grid[row][col] = turn;
             turn = "X";
         }
         turnCount += 1;
-        if (turnCount >= 5) {
-            checkWin(turn === "X" ? "O" : "X");
+        if(turnCount >= 5) {
+            if(checkWin(player)) {
+                game.textContent = (player + " is the winner!");
+                backBtn.classList.remove("hidden");
+            }
         }
         if(turnCount === 9) {
-            draw();
+            game.textContent = ("Draw!");
+            backBtn.classList.remove("hidden");
         }
     }
 }
