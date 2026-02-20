@@ -23,7 +23,7 @@ body {
 
 .game {
     display: grid;
-    border: 5px solid black;
+    border: 5px solid rgb(101, 188, 238);
     grid-template-columns: repeat(3, 150px);
     grid-template-rows: repeat(3, 150px);
     gap: 0px;

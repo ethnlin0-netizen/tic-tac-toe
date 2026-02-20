@@ -26,20 +26,38 @@ play2.addEventListener("click", () => {
 });
 
 const board = document.querySelectorAll(".square");
-let turn = 0;
+let turn = "x"
 board.forEach(square => {
     square.addEventListener("click", () => {
         const coordinate = square.dataset.value;
-        if(turn % 2 == 0) {
+        //use makeMove here
+        makeMove(square, coordinate);
+    });
+});
+
+let grid = [
+    ["", "", ""],
+    ["", "", ""],
+    ["", "", ""]
+];
+
+function makeMove(square, coord) {
+    row = parseInt(coord[0]);
+    col = parseInt(coord[1]);
+    if(grid[row][col] == "") {
+        if(turn == "x") {
             square.classList.add("x");
             square.textContent = "X";
+            turn = "o";
+            grid[row][col] = "X"
         } else {
             square.classList.add("o");
             square.textContent = "O";
+            turn = "x"
+            grid[row][col] = "O";
         }
-        turn++;
-    });
-});
+    }
+}
 
 
 
