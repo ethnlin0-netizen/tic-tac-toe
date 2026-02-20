@@ -26,12 +26,22 @@ play2.addEventListener("click", () => {
 });
 
 const board = document.querySelectorAll(".square");
-let turn = "x";
+let turn = 0;
 board.forEach(square => {
     square.addEventListener("click", () => {
         const coordinate = square.dataset.value;
-    })
+        if(turn % 2 == 0) {
+            square.classList.add("x");
+            square.textContent = "X";
+        } else {
+            square.classList.add("o");
+            square.textContent = "O";
+        }
+        turn++;
+    });
 });
+
+
 
 //idea: when each square is clicked, set the text of that square to "X" or "O"
 //switch the turn, then update a separate 2d array accordingly
