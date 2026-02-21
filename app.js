@@ -34,6 +34,7 @@ let turn = "X";
 
 board.forEach(square => {
     square.addEventListener("click", () => {
+        if(gameOver) return;
         const coordinate = square.dataset.value;
         //use makeMove here
         makeMove(square, coordinate);
@@ -89,7 +90,7 @@ function makeMove(square, coord) {
             turn = "X";
         }
         turnCount += 1;
-        if(turnCount >= 5 && gameOver == false) {
+        if(turnCount >= 5) {
             if(checkWin(player)) {
                 statusEl.textContent = player + " wins";
                 gameOver = true;
