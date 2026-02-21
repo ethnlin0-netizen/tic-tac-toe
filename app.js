@@ -28,10 +28,12 @@ backBtn.addEventListener("click", () => {
     backBtn.classList.add("hidden");
     play1.classList.add("hidden");
     play2.classList.add("hidden");
+    msg.textContent = "Tic-Tac-Toe!";
 });
 
 play1.addEventListener("click", () => {
     msg.textContent = "Would you like to play as X or O?";
+    playBtn.classList.add("hidden");
     play1.classList.add("hidden");
     play2.classList.add("hidden");
     xBtn.classList.remove("hidden");
@@ -116,7 +118,6 @@ function makeMove(square, coord) {
 function gameReset() {
     gameWrapper.classList.add("hidden");
     start.classList.remove("hidden");
-    msg.textContent = "Tic-Tac-Toe!";
 
     playBtn.classList.remove("hidden");
     backBtn.classList.add("hidden");
