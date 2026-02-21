@@ -14,6 +14,8 @@ playBtn.addEventListener("click", () => {
 });
 
 backBtn.addEventListener("click", () => {
+    start.classList.remove("hidden");
+    gameWrapper.classList.add("hidden");
     playBtn.classList.remove("hidden");
     backBtn.classList.add("hidden");
     play1.classList.add("hidden");
