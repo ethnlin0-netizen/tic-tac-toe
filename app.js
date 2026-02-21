@@ -22,14 +22,12 @@ backBtn.addEventListener("click", () => {
     play2.classList.add("hidden");
 });
 
-let board;
-
 play2.addEventListener("click", () => {
     start.classList.add("hidden");
     gameWrapper.classList.remove("hidden");
-    board = document.querySelectorAll(".square");
 });
 
+const board = document.querySelectorAll(".square");
 let turn = "X"
 board.forEach(square => {
     square.addEventListener("click", () => {
@@ -91,17 +89,11 @@ function makeMove(square, coord) {
         if(turnCount >= 5) {
             if(checkWin(player)) {
                 statusEl.textContent = player + " wins";
-                board = null;
                 backBtn.classList.remove("hidden");
             }
         }
         if(turnCount === 9) {
-            if(checkWin(player)) {
-                statusEl.textContent = player + " wins";
-            } else {
-                statusEl.textContent = ("Draw");
-            }
-            board = null;
+            statusEl.textContent = ("Draw");
             backBtn.classList.remove("hidden");
         }
     }
