@@ -9,6 +9,27 @@ const mainMenu = document.getElementById("mainMenu");
 
 let gameOver;
 
+mainMenu.addEventListener("click", () => {
+    mainMenu.classList.add("hidden");
+    start.classList.remove("hidden");
+
+    playBtn.classList.remove("hidden");
+    backBtn.classList.add("hidden");
+    play1.classList.add("hidden");
+    play2.classList.add("hidden");
+    mainMenu.classList.add("hidden");
+
+    grid = [["","",""],["","",""],["","",""]];
+    turn = "X";
+    turnCount = 0;
+    gameOver = false;
+    statusEl.textContent = "";
+    board.forEach(square => {
+        square.textContent = "";
+        square.classList.remove("x", "o");
+    });
+});
+
 playBtn.addEventListener("click", () => {
     playBtn.classList.add("hidden");
     backBtn.classList.remove("hidden");
@@ -90,15 +111,12 @@ function makeMove(square, coord) {
             turn = "X";
         }
         turnCount += 1;
-        if(turnCount >= 5) {
-            if(checkWin(player)) {
-                statusEl.textContent = player + " wins";
-                gameOver = true;
-                mainMenu.classList.remove("hidden");
-            }
-        }
-        if(turnCount === 9) {
-            statusEl.textContent = ("Draw");
+        if (turnCount >= 5 && checkWin(player)) {
+            statusEl.textContent = player + " wins";
+            gameOver = true;
+            mainMenu.classList.remove("hidden");
+        } else if (turnCount === 9) {
+            statusEl.textContent = "Draw";
             gameOver = true;
             mainMenu.classList.remove("hidden");
         }
