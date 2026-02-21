@@ -6,6 +6,8 @@ const start = document.querySelector(".start");
 const gameWrapper = document.querySelector(".game-wrapper");
 const statusEl = document.querySelector(".status");
 const mainMenu = document.getElementById("mainMenu");
+const xBtn = document.getElementById("xBtn");
+const oBtn = document.getElementById("oBtn");
 
 let gameOver;
 
@@ -28,8 +30,19 @@ backBtn.addEventListener("click", () => {
 });
 
 play1.addEventListener("click", () => {
+    play1.classList.add("hidden");
+    xBtn.classList.remove("hidden");
+    oBtn.classList.remove("hidden");
+    statusEl.textContent = "Would you like to play as X or O?";
+});
+
+xBtn.addEventListener("click", () => {
     gameStart();
-})
+});
+
+oBtn.addEventListener("click", () => {
+    gameStart();
+});
 
 play2.addEventListener("click", () => {
     gameStart();
@@ -73,14 +86,14 @@ function makeMove(square, coord) {
     if(grid[row][col] == "") {
         if(turn == "X") {
             player = "X"
-            square.classList.add("x", "pop");
+            square.classList.add("x");
             square.textContent = turn;
             grid[row][col] = turn;
             turn = "O";
             
         } else {
             player = "O";
-            square.classList.add("o", "pop");
+            square.classList.add("o");
             square.textContent = turn;
             grid[row][col] = turn;
             turn = "X";
