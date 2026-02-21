@@ -3,7 +3,7 @@ const backBtn = document.getElementById("backBtn");
 const play1 = document.getElementById("1PlayerBtn");
 const play2 = document.getElementById("2PlayerBtn");
 const start = document.querySelector(".start");
-const game = document.querySelector(".game");
+const gameWrapper = document.querySelector(".game-wrapper");
 const statusEl = document.querySelector(".status");
 
 playBtn.addEventListener("click", () => {
@@ -22,7 +22,7 @@ backBtn.addEventListener("click", () => {
 
 play2.addEventListener("click", () => {
     start.classList.add("hidden");
-    game.classList.remove("hidden");
+    gameWrapper.classList.remove("hidden");
 });
 
 const board = document.querySelectorAll(".square");
