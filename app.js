@@ -4,7 +4,7 @@ const play1 = document.getElementById("1PlayerBtn");
 const play2 = document.getElementById("2PlayerBtn");
 const start = document.querySelector(".start");
 const game = document.querySelector(".game");
-
+const statusEl = document.querySelector(".status");
 
 playBtn.addEventListener("click", () => {
     playBtn.classList.add("hidden");
@@ -61,25 +61,23 @@ function checkWin(player) {
     return false;
 }
 
-function draw() {
-
-}
 
 let turnCount = 0;
 
 function makeMove(square, coord) {
-    row = parseInt(coord[0]);
-    col = parseInt(coord[1]);
+    let player = ""
+    let row = parseInt(coord[0]);
+    let col = parseInt(coord[1]);
     if(grid[row][col] == "") {
         if(turn == "X") {
-            let player = "X"
+            player = "X"
             square.classList.add("x");
             square.textContent = turn;
             grid[row][col] = turn;
             turn = "O";
             
         } else {
-            let player = "O";
+            player = "O";
             square.classList.add("o");
             square.textContent = turn;
             grid[row][col] = turn;
@@ -88,12 +86,12 @@ function makeMove(square, coord) {
         turnCount += 1;
         if(turnCount >= 5) {
             if(checkWin(player)) {
-                game.textContent = (player + " is the winner!");
+                statusEl.textContent = player + " wins";
                 backBtn.classList.remove("hidden");
             }
         }
         if(turnCount === 9) {
-            game.textContent = ("Draw!");
+            statusEl.textContent = ("Draw");
             backBtn.classList.remove("hidden");
         }
     }
