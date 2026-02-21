@@ -10,24 +10,7 @@ const mainMenu = document.getElementById("mainMenu");
 let gameOver;
 
 mainMenu.addEventListener("click", () => {
-    gameWrapper.classList.add("hidden");
-    start.classList.remove("hidden");
-
-    playBtn.classList.remove("hidden");
-    backBtn.classList.add("hidden");
-    play1.classList.add("hidden");
-    play2.classList.add("hidden");
-    mainMenu.classList.add("hidden");
-
-    grid = [["","",""],["","",""],["","",""]];
-    turn = "X";
-    turnCount = 0;
-    gameOver = false;
-    statusEl.textContent = "";
-    board.forEach(square => {
-        square.textContent = "";
-        square  .classList.remove("x", "o");
-    });
+    gameReset();
 });
 
 playBtn.addEventListener("click", () => {
@@ -44,10 +27,12 @@ backBtn.addEventListener("click", () => {
     play2.classList.add("hidden");
 });
 
+play1.addEventListener("click", () => {
+    gameStart();
+})
+
 play2.addEventListener("click", () => {
-    start.classList.add("hidden");
-    gameWrapper.classList.remove("hidden");
-    gameOver = false;
+    gameStart();
 });
 
 const board = document.querySelectorAll(".square");
@@ -79,16 +64,6 @@ const winPatterns = [
     [[0,2],[1,1],[2,0]]  
 ];
 
-function checkWin(player) {
-    for(let pattern of winPatterns) {
-        if(pattern.every(([r, c]) => grid[r][c] === player)) {
-            return true;
-        }
-    }
-    return false;
-}
-
-
 let turnCount = 0;
 
 function makeMove(square, coord) {
@@ -98,14 +73,14 @@ function makeMove(square, coord) {
     if(grid[row][col] == "") {
         if(turn == "X") {
             player = "X"
-            square.classList.add("x");
+            square.classList.add("x", "pop");
             square.textContent = turn;
             grid[row][col] = turn;
             turn = "O";
             
         } else {
             player = "O";
-            square.classList.add("o");
+            square.classList.add("o", "pop");
             square.textContent = turn;
             grid[row][col] = turn;
             turn = "X";
@@ -123,7 +98,41 @@ function makeMove(square, coord) {
     }
 }
 
+function gameReset() {
+    gameWrapper.classList.add("hidden");
+    start.classList.remove("hidden");
 
+    playBtn.classList.remove("hidden");
+    backBtn.classList.add("hidden");
+    play1.classList.add("hidden");
+    play2.classList.add("hidden");
+    mainMenu.classList.add("hidden");
+
+    grid = [["","",""],["","",""],["","",""]];
+    turn = "X";
+    turnCount = 0;
+    gameOver = false;
+    statusEl.textContent = "";
+    board.forEach(square => {
+        square.textContent = "";
+        square  .classList.remove("x", "o");
+    });
+}
+
+function checkWin(player) {
+    for(let pattern of winPatterns) {
+        if(pattern.every(([r, c]) => grid[r][c] === player)) {
+            return true;
+        }
+    }
+    return false;
+}
+
+function gameStart() {
+    start.classList.add("hidden");
+    gameWrapper.classList.remove("hidden");
+    gameOver = false;
+}
 
 //idea: when each square is clicked, set the text of that square to "X" or "O"
 //switch the turn, then update a separate 2d array accordingly
