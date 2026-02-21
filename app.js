@@ -10,7 +10,7 @@ const mainMenu = document.getElementById("mainMenu");
 let gameOver;
 
 mainMenu.addEventListener("click", () => {
-    mainMenu.classList.add("hidden");
+    gameWrapper.classList.add("hidden");
     start.classList.remove("hidden");
 
     playBtn.classList.remove("hidden");
@@ -26,7 +26,7 @@ mainMenu.addEventListener("click", () => {
     statusEl.textContent = "";
     board.forEach(square => {
         square.textContent = "";
-        square.classList.remove("x", "o");
+        square  .classList.remove("x", "o");
     });
 });
 
