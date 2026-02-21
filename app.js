@@ -8,7 +8,7 @@ const statusEl = document.querySelector(".status");
 const mainMenu = document.getElementById("mainMenu");
 const xBtn = document.getElementById("xBtn");
 const oBtn = document.getElementById("oBtn");
-const msg = document.querySelector(".h1");
+const msg = document.querySelector(".message");
 
 let gameOver;
 
@@ -31,11 +31,11 @@ backBtn.addEventListener("click", () => {
 });
 
 play1.addEventListener("click", () => {
-    h1.textContent = "Would you like to play as X or O?";
-    start.classList.add("hidden");
+    msg.textContent = "Would you like to play as X or O?";
+    play1.classList.add("hidden");
+    play2.classList.add("hidden");
     xBtn.classList.remove("hidden");
     oBtn.classList.remove("hidden");
-    backBtn.classList.remove("hidden");
 });
 
 xBtn.addEventListener("click", () => {
