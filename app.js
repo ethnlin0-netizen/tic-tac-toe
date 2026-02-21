@@ -8,6 +8,7 @@ const statusEl = document.querySelector(".status");
 const mainMenu = document.getElementById("mainMenu");
 const xBtn = document.getElementById("xBtn");
 const oBtn = document.getElementById("oBtn");
+const msg = document.querySelector(".h1");
 
 let gameOver;
 
@@ -30,10 +31,11 @@ backBtn.addEventListener("click", () => {
 });
 
 play1.addEventListener("click", () => {
-    play1.classList.add("hidden");
+    h1.textContent = "Would you like to play as X or O?";
+    start.classList.add("hidden");
     xBtn.classList.remove("hidden");
     oBtn.classList.remove("hidden");
-    statusEl.textContent = "Would you like to play as X or O?";
+    backBtn.classList.remove("hidden");
 });
 
 xBtn.addEventListener("click", () => {
@@ -114,6 +116,7 @@ function makeMove(square, coord) {
 function gameReset() {
     gameWrapper.classList.add("hidden");
     start.classList.remove("hidden");
+    msg.textContent = "Tic-Tac-Toe!";
 
     playBtn.classList.remove("hidden");
     backBtn.classList.add("hidden");
