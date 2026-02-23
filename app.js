@@ -9,11 +9,12 @@ const mainMenu = document.getElementById("mainMenu");
 const xBtn = document.getElementById("xBtn");
 const oBtn = document.getElementById("oBtn");
 const msg = document.querySelector(".message");
-const mid = document.getElementById("11");
+const mid = document.getElementById("mid");
 
 let gameOver;
 let ai = false;
 let playerTurn;
+let turn;
 
 mainMenu.addEventListener("click", () => {
     gameReset();
@@ -62,7 +63,6 @@ play2.addEventListener("click", () => {
 });
 
 const board = document.querySelectorAll(".square");
-let turn = "X";
 
 board.forEach(square => {
     square.addEventListener("click", () => {
@@ -76,7 +76,7 @@ board.forEach(square => {
                 if(!gameOver) {
                     if(playerTurn == "X"){
                         //ai logic here for when ai is O
-                        
+
                     } else {
                         //ai logic here for when ai is X
                     }
@@ -142,6 +142,7 @@ function gameReset() {
     start.classList.remove("hidden");
     ai = false;
     playerTurn = "";
+    turn = "";
 
     playBtn.classList.remove("hidden");
     backBtn.classList.add("hidden");
@@ -152,7 +153,6 @@ function gameReset() {
     oBtn.classList.add("hidden");
 
     grid = [["","",""],["","",""],["","",""]];
-    turn = "X";
     turnCount = 0;
     gameOver = false;
     statusEl.textContent = "";
@@ -172,6 +172,7 @@ function checkWin(player) {
 }
 
 function gameStart() {
+    turn = "X";
     start.classList.add("hidden");
     gameWrapper.classList.remove("hidden");
     gameOver = false;
