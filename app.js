@@ -9,8 +9,11 @@ const mainMenu = document.getElementById("mainMenu");
 const xBtn = document.getElementById("xBtn");
 const oBtn = document.getElementById("oBtn");
 const msg = document.querySelector(".message");
+const mid = document.getElementById("11");
 
 let gameOver;
+let ai = false;
+let playerTurn;
 
 mainMenu.addEventListener("click", () => {
     gameReset();
@@ -29,6 +32,8 @@ backBtn.addEventListener("click", () => {
     play1.classList.add("hidden");
     play2.classList.add("hidden");
     msg.textContent = "Tic-Tac-Toe!";
+    xBtn.classList.add("hidden");
+    oBtn.classList.add("hidden");
 });
 
 play1.addEventListener("click", () => {
@@ -41,10 +46,14 @@ play1.addEventListener("click", () => {
 });
 
 xBtn.addEventListener("click", () => {
+    ai = true;
+    playerTurn = "X";
     gameStart();
 });
 
 oBtn.addEventListener("click", () => {
+    ai = true;
+    playerTurn = "O";
     gameStart();
 });
 
@@ -59,8 +68,21 @@ board.forEach(square => {
     square.addEventListener("click", () => {
         if(gameOver) return;
         const coordinate = square.dataset.value;
-        //use makeMove here
-        makeMove(square, coordinate);
+        if(ai == false) {
+            makeMove(square, coordinate);
+        } else {
+            if(turn == playerTurn) {
+                makeMove(square, coordinate);
+                if(!gameOver) {
+                    if(playerTurn == "X"){
+                        //ai logic here for when ai is O
+                        
+                    } else {
+                        //ai logic here for when ai is X
+                    }
+                }
+            }
+        }
     });
 });
 
@@ -118,12 +140,16 @@ function makeMove(square, coord) {
 function gameReset() {
     gameWrapper.classList.add("hidden");
     start.classList.remove("hidden");
+    ai = false;
+    playerTurn = "";
 
     playBtn.classList.remove("hidden");
     backBtn.classList.add("hidden");
     play1.classList.add("hidden");
     play2.classList.add("hidden");
     mainMenu.classList.add("hidden");
+    xBtn.classList.add("hidden");
+    oBtn.classList.add("hidden");
 
     grid = [["","",""],["","",""],["","",""]];
     turn = "X";
@@ -149,12 +175,11 @@ function gameStart() {
     start.classList.add("hidden");
     gameWrapper.classList.remove("hidden");
     gameOver = false;
+    if(playerTurn == "O") {
+        setTimeout(() => {
+            makeMove(mid, "11");
+        }, 600);
+    }  
 }
-
-//idea: when each square is clicked, set the text of that square to "X" or "O"
-//switch the turn, then update a separate 2d array accordingly
-//this array will be used to track if a move is valid or if someone has won
-//the data-value of each square will determine which array element to update
-
 
 
