@@ -14,6 +14,7 @@ const mid = document.getElementById("mid");
 let gameOver;
 let ai = false;
 let playerTurn;
+let aiTurn;
 let turn;
 
 mainMenu.addEventListener("click", () => {
@@ -49,12 +50,14 @@ play1.addEventListener("click", () => {
 xBtn.addEventListener("click", () => {
     ai = true;
     playerTurn = "X";
+    aiTurn = "O";
     gameStart();
 });
 
 oBtn.addEventListener("click", () => {
     ai = true;
     playerTurn = "O";
+    aiTurn = "X";
     gameStart();
 });
 
@@ -72,11 +75,11 @@ board.forEach(square => {
             makeMove(square, coordinate);
         } else {
             if(turn == playerTurn) {
-                makeMove(square, coordinate);
+                makeMove(document.querySelector, coordinate);
                 if(!gameOver) {
                     if(playerTurn == "X"){
                         //ai logic here for when ai is O
-
+                        
                     } else {
                         //ai logic here for when ai is X
                     }
@@ -85,6 +88,11 @@ board.forEach(square => {
         }
     });
 });
+//AI logic is as follows:
+//Loop through empty squares pretending it's the AI's turn. If any move wins, take it
+//Loop through empty squares pretending it's the player's turn. If any move wins, block it
+//Otherwise, pick a random empty square
+
 
 let grid = [
     ["", "", ""],
@@ -135,6 +143,53 @@ function makeMove(square, coord) {
             mainMenu.classList.remove("hidden");
         }
     }
+}
+
+//global variables can be accessed by functions
+function aiMove() {
+    //#1 - if there's a winning move, make it
+    for(let i = 0; i < 3; i++) {
+        for(let j = 0; j < 3; j++) {
+            let tempCoord = `${i}${j}`;
+            if(grid[i][j] == "") {
+                grid[i][j] = aiTurn;
+                if(checkWin(aiTurn)) {
+                    grid[i][j] = "";
+                    makeMove(document.querySelector('[data-value="' + tempCoord + '"]'), tempCoord)
+                    return;
+                } else{
+                    grid[i][j] = "";
+                }
+            }
+        }
+    }
+    //#2 - no winning move, but if the player has a winning move, block it
+    for(let i = 0; i < 3; i++) {
+        for(let j = 0; j < 3; j++) {
+            let tempCoord = `${i}${j}`;
+            if(grid[i][j] == "") {
+                grid[i][j] = playerTurn;
+                if(checkWin(playerTurn)) {
+                    grid[i][j] = "";
+                    makeMove(document.querySelector('[data-value="' + tempCoord + '"]'), tempCoord)
+                    return;
+                } else{
+                    grid[i][j] = "";
+                }
+            }
+        }
+    }
+    //#3 - otherwise, make a random move
+    let emptySquares = [];
+    for(let i = 0; i < 3; i++) {
+        for(let j = 0; j < 3; j++) {
+            if(grid[i][j] == "") {
+                emptySquares.push(`${i}${j}`);
+            }
+        }
+    }
+    let random = emptySquares[Math.floor(Math.random() * emptySquares.length)];
+    makeMove(document.querySelector('[data-value="' + random + '"]'), random); 
 }
 
 function gameReset() {
