@@ -75,14 +75,11 @@ board.forEach(square => {
             makeMove(square, coordinate);
         } else {
             if(turn == playerTurn) {
-                makeMove(document.querySelector, coordinate);
+                makeMove(square, coordinate);
                 if(!gameOver) {
-                    if(playerTurn == "X"){
-                        //ai logic here for when ai is O
-                        
-                    } else {
-                        //ai logic here for when ai is X
-                    }
+                    setTimeout(() => {
+                        aiMove();
+                    }, 600);
                 }
             }
         }
